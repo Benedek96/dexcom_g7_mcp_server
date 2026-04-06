@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
 
 from flask import Flask, request, jsonify
+import requests
 import os
 import logging
-from pydexcom import Dexcom
+from datetime import datetime, timezone
 
-# Configuration
-DEXCOM_USERNAME = os.getenv("DEXCOM_USERNAME", "")
-DEXCOM_PASSWORD = os.getenv("DEXCOM_PASSWORD", "")
-DEXCOM_REGION = os.getenv("DEXCOM_REGION", "us")
+XDRIP_HOST = os.getenv("XDRIP_HOST", "localhost")
+XDRIP_PORT = int(os.getenv("XDRIP_PORT", "17580"))
 HTTP_PORT = int(os.getenv("HTTP_PORT", "8007"))
 
 logging.basicConfig(level=logging.INFO)
@@ -16,21 +15,33 @@ logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
 
-# Initialize Dexcom client
-dexcom_client = None
-if DEXCOM_USERNAME and DEXCOM_PASSWORD:
-    try:
-        dexcom_client = Dexcom(
-            username=DEXCOM_USERNAME,
-            password=DEXCOM_PASSWORD,
-            region=DEXCOM_REGION
-        )
-        logger.info("Dexcom client initialized successfully")
-    except Exception as e:
-        logger.error(f"Failed to initialize Dexcom client: {e}")
-
 def mg_to_mmol(mg_value: float) -> float:
     return round(mg_value * 0.0555, 2)
+
+def get_xdrip_readings(count=20):
+    url = f"http://{XDRIP_HOST}:{XDRIP_PORT}/sgv.json?count={count}"
+    r = requests.get(url, timeout=5)
+    r.raise_for_status()
+    return r.json()
+
+def format_direction(direction: str) -> str:
+    mapping = {
+        "DoubleUp": "Rapidly Rising",
+        "SingleUp": "Rising",
+        "FortyFiveUp": "Slowly Rising",
+        "Flat": "Steady",
+        "FortyFiveDown": "Slowly Falling",
+        "SingleDown": "Falling",
+        "DoubleDown": "Rapidly Falling",
+        "NONE": "Unknown",
+        "NOT COMPUTABLE": "Unknown",
+        "RATE OUT OF RANGE": "Unknown",
+    }
+    return mapping.get(direction, direction)
+
+def format_time(date_ms: int) -> str:
+    dt = datetime.fromtimestamp(date_ms / 1000, tz=timezone.utc).astimezone()
+    return dt.strftime("%Y-%m-%d %H:%M:%S")
 
 @app.post("/")
 def mcp_endpoint():
@@ -45,7 +56,7 @@ def mcp_endpoint():
             "result": {
                 "protocolVersion": "2024-11-05",
                 "capabilities": {"tools": {"listChanged": False}},
-                "serverInfo": {"name": "dexcom-monitor", "version": "1.0.0"}
+                "serverInfo": {"name": "dexcom-monitor", "version": "2.0.0"}
             }
         })
 
@@ -57,19 +68,19 @@ def mcp_endpoint():
                 "tools": [
                     {
                         "name": "get_current_glucose",
-                        "description": "Get current glucose reading from Dexcom G7",
+                        "description": "Get current glucose reading from Dexcom G7 via xDrip+",
                         "inputSchema": {"type": "object", "properties": {}, "required": []}
                     },
                     {
                         "name": "get_glucose_history",
-                        "description": "Get glucose history for specified hours",
+                        "description": "Get glucose history (last N readings)",
                         "inputSchema": {
                             "type": "object",
                             "properties": {
-                                "hours": {
+                                "count": {
                                     "type": "integer",
-                                    "description": "Hours of history (default: 6)",
-                                    "default": 6
+                                    "description": "Number of readings to retrieve (default: 12)",
+                                    "default": 12
                                 }
                             },
                             "required": []
@@ -80,65 +91,66 @@ def mcp_endpoint():
         })
 
     elif method == "tools/call":
-        if not dexcom_client:
-            return jsonify({
-                "jsonrpc": "2.0",
-                "id": req_id,
-                "error": {"code": -32603, "message": "Dexcom client not initialized"}
-            })
-
         params = data.get("params", {})
         tool_name = params.get("name")
         arguments = params.get("arguments", {})
 
         try:
             if tool_name == "get_current_glucose":
-                reading = dexcom_client.get_latest_glucose_reading()
-                mmol_value = mg_to_mmol(reading.value)
+                readings = get_xdrip_readings(count=1)
+                if not readings:
+                    return jsonify({
+                        "jsonrpc": "2.0", "id": req_id,
+                        "error": {"code": -32603, "message": "No readings available"}
+                    })
+                r = readings[0]
+                mmol = mg_to_mmol(r["sgv"])
                 result_text = (
-                    f"Current Glucose: {reading.value} mg/dL ({mmol_value} mmol/L)\n"
-                    f"Trend: {reading.trend_description}\n"
-                    f"Time: {reading.datetime.strftime('%Y-%m-%d %H:%M:%S')}"
+                    f"Current Glucose: {r['sgv']} mg/dL ({mmol} mmol/L)\n"
+                    f"Trend: {format_direction(r.get('direction', 'Unknown'))}\n"
+                    f"Time: {format_time(r['date'])}"
                 )
                 return jsonify({
-                    "jsonrpc": "2.0",
-                    "id": req_id,
+                    "jsonrpc": "2.0", "id": req_id,
                     "result": {"content": [{"type": "text", "text": result_text}]}
                 })
 
             elif tool_name == "get_glucose_history":
-                hours = arguments.get("hours", 6)
-                readings = dexcom_client.get_glucose_readings(minutes=hours * 60, max_count=20)
+                count = arguments.get("count", 12)
+                readings = get_xdrip_readings(count=count)
                 if not readings:
-                    result_text = f"No glucose readings found for the last {hours} hours."
+                    result_text = "No glucose readings available."
                 else:
-                    lines = [f"Last {hours}h glucose readings:"]
-                    for i, reading in enumerate(readings[:10]):
-                        mmol_value = mg_to_mmol(reading.value)
+                    lines = [f"Last {len(readings)} glucose readings:"]
+                    for i, r in enumerate(readings):
+                        mmol = mg_to_mmol(r["sgv"])
                         lines.append(
-                            f"{i+1}. {reading.datetime.strftime('%Y-%m-%d %H:%M:%S')} - "
-                            f"{reading.value} mg/dL ({mmol_value} mmol/L) [{reading.trend_description}]"
+                            f"{i+1}. {format_time(r['date'])} - "
+                            f"{r['sgv']} mg/dL ({mmol} mmol/L) [{format_direction(r.get('direction', 'Unknown'))}]"
                         )
                     result_text = "\n".join(lines)
                 return jsonify({
-                    "jsonrpc": "2.0",
-                    "id": req_id,
+                    "jsonrpc": "2.0", "id": req_id,
                     "result": {"content": [{"type": "text", "text": result_text}]}
                 })
 
+        except requests.exceptions.ConnectionError:
+            return jsonify({
+                "jsonrpc": "2.0", "id": req_id,
+                "error": {"code": -32603, "message": "Cannot connect to xDrip+. Is it running with REST API enabled?"}
+            })
         except Exception as e:
             return jsonify({
-                "jsonrpc": "2.0",
-                "id": req_id,
-                "error": {"code": -32603, "message": f"Error executing tool: {str(e)}"}
+                "jsonrpc": "2.0", "id": req_id,
+                "error": {"code": -32603, "message": f"Error: {str(e)}"}
             })
 
     return jsonify({
-        "jsonrpc": "2.0",
-        "id": req_id,
+        "jsonrpc": "2.0", "id": req_id,
         "error": {"code": -32601, "message": f"Method not found: {method}"}
     })
 
 if __name__ == "__main__":
-    logger.info(f"Starting Dexcom MCP server on port {HTTP_PORT}")
+    logger.info(f"Starting Dexcom MCP server (xDrip+ mode) on port {HTTP_PORT}")
+    logger.info(f"Reading from xDrip+ at {XDRIP_HOST}:{XDRIP_PORT}")
     app.run(host="0.0.0.0", port=HTTP_PORT)
