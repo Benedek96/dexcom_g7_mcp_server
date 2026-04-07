@@ -1,0 +1,268 @@
+{
+  "vendors": [
+    {
+      "name": "Xiaomi",
+      "manufacturer": [
+        "xiaomi"
+      ],
+      "url": "/xiaomi",
+      "award": 5,
+      "position": 2,
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
+    },
+    {
+      "name": "Samsung",
+      "manufacturer": [
+        "samsung"
+      ],
+      "url": "/samsung",
+      "award": 5,
+      "position": 4,
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
+    },
+    {
+      "name": "OnePlus",
+      "manufacturer": [
+        "oneplus"
+      ],
+      "url": "/oneplus",
+      "award": 5,
+      "position": 3,
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
+    },
+    {
+      "name": "Huawei",
+      "manufacturer": [
+        "huawei"
+      ],
+      "url": "/huawei",
+      "award": 5,
+      "position": 1,
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
+    },
+    {
+      "name": "Meizu",
+      "manufacturer": [
+        "meizu"
+      ],
+      "url": "/meizu",
+      "award": 4,
+      "position": 5,
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
+    },
+    {
+      "name": "Asus",
+      "manufacturer": [
+        "asus"
+      ],
+      "url": "/asus",
+      "award": 4,
+      "position": 6,
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
+    },
+    {
+      "name": "Wiko",
+      "manufacturer": [
+        "wiko"
+      ],
+      "url": "/wiko",
+      "award": 3,
+      "position": 7,
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
+    },
+    {
+      "name": "Vivo",
+      "manufacturer": [
+        "vivo"
+      ],
+      "url": "/vivo",
+      "award": 3,
+      "position": 10,
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
+    },
+    {
+      "name": "Tecno",
+      "manufacturer": [
+        "tecno"
+      ],
+      "url": "/tecno",
+      "award": 3,
+      "position": 14,
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
+    },
+    {
+      "name": "Realme",
+      "manufacturer": [
+        "realme"
+      ],
+      "url": "/realme",
+      "award": 3,
+      "position": 11,
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
+    },
+    {
+      "name": "Oppo",
+      "manufacturer": [
+        "oppo"
+      ],
+      "url": "/oppo",
+      "award": 3,
+      "position": 9,
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
+    },
+    {
+      "name": "Motorola",
+      "manufacturer": [
+        "motorola"
+      ],
+      "url": "/motorola",
+      "award": 3,
+      "position": 12,
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
+    },
+    {
+      "name": "Lenovo",
+      "manufacturer": [
+        "lenovo"
+      ],
+      "url": "/lenovo",
+      "award": 3,
+      "position": 8,
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
+    },
+    {
+      "name": "Blackview",
+      "manufacturer": [
+        "blackview"
+      ],
+      "url": "/blackview",
+      "award": 3,
+      "position": 13,
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
+    },
+    {
+      "name": "Unihertz",
+      "manufacturer": [
+        "unihertz"
+      ],
+      "url": "/unihertz",
+      "award": 2,
+      "position": 16,
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
+    },
+    {
+      "name": "Sony",
+      "manufacturer": [
+        "sony"
+      ],
+      "url": "/sony",
+      "award": 2,
+      "position": 15,
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
+    },
+    {
+      "name": "AOSP / Stock Android",
+      "manufacturer": [
+        "stock_android"
+      ],
+      "url": "/stock_android",
+      "award": 0,
+      "position": null,
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
+    },
+    {
+      "name": "Google Pixel",
+      "manufacturer": [
+        "google"
+      ],
+      "url": "/google",
+      "award": 0,
+      "position": null,
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
+    },
+    {
+      "name": "Nokia",
+      "manufacturer": [
+        "nokia"
+      ],
+      "url": "/nokia",
+      "award": 0,
+      "position": null,
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
+    },
+    {
+      "name": "HMD Global",
+      "manufacturer": [
+        "hmd global"
+      ],
+      "url": "/hmd-global",
+      "award": 0,
+      "position": null,
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
+    },
+    {
+      "name": "HTC",
+      "manufacturer": [
+        "htc"
+      ],
+      "url": "/htc",
+      "award": 0,
+      "position": null,
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
+    },
+    {
+      "name": "Other vendors",
+      "manufacturer": [
+        "general"
+      ],
+      "url": "/general",
+      "award": null,
+      "position": 9999,
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
+    }
+  ]
+}
