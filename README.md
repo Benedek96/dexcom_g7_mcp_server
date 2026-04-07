@@ -12,6 +12,38 @@ A Model Context Protocol (MCP) server that provides access to Dexcom G7 continuo
 
 ## Quick Start
 
+### Using Termux (Android)
+
+Termux allows you to run this server directly on your Android phone — ideal since your phone is already near your Dexcom G7 device.
+
+**1. Update packages and install dependencies:**
+
+```bash
+pkg upgrade
+pkg install python git
+```
+
+**2. Clone the repository and install Python dependencies:**
+
+```bash
+git clone https://github.com/benedek96/dexcom_g7_mcp_server.git
+cd dexcom_g7_mcp_server
+pip install -r requirements.txt
+```
+
+**3. Run the server:**
+
+```bash
+DEXCOM_USERNAME="your-username" \
+DEXCOM_PASSWORD="your-password" \
+DEXCOM_REGION="us" \
+python server.py
+```
+
+The server will be available at `http://localhost:8007`.
+
+> **Tip:** To keep it running after closing Termux, use `nohup python server.py &` or run it in a `tmux` session (`pkg install tmux`).
+
 ### Using Docker
 
 ```bash
