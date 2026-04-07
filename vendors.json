@@ -8,9 +8,9 @@
       "url": "/xiaomi",
       "award": 5,
       "position": 2,
-      "explanation": "\n",
-      "user_solution": "\n",
-      "developer_solution": "\n"
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
     },
     {
       "name": "Samsung",
@@ -20,9 +20,9 @@
       "url": "/samsung",
       "award": 5,
       "position": 4,
-      "explanation": "\n",
-      "user_solution": "\n",
-      "developer_solution": "\n"
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
     },
     {
       "name": "OnePlus",
@@ -32,9 +32,9 @@
       "url": "/oneplus",
       "award": 5,
       "position": 3,
-      "explanation": "\n",
-      "user_solution": "\n",
-      "developer_solution": "\n"
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
     },
     {
       "name": "Huawei",
@@ -44,9 +44,9 @@
       "url": "/huawei",
       "award": 5,
       "position": 1,
-      "explanation": "\n",
-      "user_solution": "\n",
-      "developer_solution": "\n"
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
     },
     {
       "name": "Meizu",
@@ -56,9 +56,9 @@
       "url": "/meizu",
       "award": 4,
       "position": 5,
-      "explanation": "\n",
-      "user_solution": "\n",
-      "developer_solution": "\n"
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
     },
     {
       "name": "Asus",
@@ -68,9 +68,9 @@
       "url": "/asus",
       "award": 4,
       "position": 6,
-      "explanation": "\n",
-      "user_solution": "\n",
-      "developer_solution": "\n"
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
     },
     {
       "name": "Wiko",
@@ -80,9 +80,9 @@
       "url": "/wiko",
       "award": 3,
       "position": 7,
-      "explanation": "\n",
-      "user_solution": "\n",
-      "developer_solution": "\n"
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
     },
     {
       "name": "Vivo",
@@ -92,9 +92,9 @@
       "url": "/vivo",
       "award": 3,
       "position": 10,
-      "explanation": "\n",
-      "user_solution": "\n",
-      "developer_solution": "\n"
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
     },
     {
       "name": "Tecno",
@@ -104,21 +104,21 @@
       "url": "/tecno",
       "award": 3,
       "position": 14,
-      "explanation": "\n",
-      "user_solution": "\n",
-      "developer_solution": "\n"
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
     },
     {
-      "name": "realme",
+      "name": "Realme",
       "manufacturer": [
         "realme"
       ],
       "url": "/realme",
       "award": 3,
       "position": 11,
-      "explanation": "\n",
-      "user_solution": "\n",
-      "developer_solution": "\n"
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
     },
     {
       "name": "Oppo",
@@ -128,9 +128,9 @@
       "url": "/oppo",
       "award": 3,
       "position": 9,
-      "explanation": "\n",
-      "user_solution": "\n",
-      "developer_solution": "\n"
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
     },
     {
       "name": "Motorola",
@@ -140,9 +140,9 @@
       "url": "/motorola",
       "award": 3,
       "position": 12,
-      "explanation": "\n",
-      "user_solution": "\n",
-      "developer_solution": "\n"
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
     },
     {
       "name": "Lenovo",
@@ -152,9 +152,9 @@
       "url": "/lenovo",
       "award": 3,
       "position": 8,
-      "explanation": "\n",
-      "user_solution": "\n",
-      "developer_solution": "\n"
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
     },
     {
       "name": "Blackview",
@@ -164,9 +164,9 @@
       "url": "/blackview",
       "award": 3,
       "position": 13,
-      "explanation": "\n",
-      "user_solution": "\n",
-      "developer_solution": "\n"
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
     },
     {
       "name": "Unihertz",
@@ -176,9 +176,9 @@
       "url": "/unihertz",
       "award": 2,
       "position": 16,
-      "explanation": "\n",
-      "user_solution": "\n",
-      "developer_solution": "\n"
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
     },
     {
       "name": "Sony",
@@ -188,35 +188,57 @@
       "url": "/sony",
       "award": 2,
       "position": 15,
-      "explanation": "\n",
-      "user_solution": "\n",
-      "developer_solution": "\n"
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
     },
     {
-      "name": "AOSP",
+      "name": "AOSP / Stock Android",
       "manufacturer": [
-        "stock_android",
-        "google"
+        "stock_android"
       ],
       "url": "/stock_android",
       "award": 0,
       "position": null,
-      "explanation": "\n",
-      "user_solution": "\n",
-      "developer_solution": "\n"
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
+    },
+    {
+      "name": "Google Pixel",
+      "manufacturer": [
+        "google"
+      ],
+      "url": "/google",
+      "award": 0,
+      "position": null,
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
     },
     {
       "name": "Nokia",
       "manufacturer": [
-        "nokia",
-        "hmd global"
+        "nokia"
       ],
       "url": "/nokia",
       "award": 0,
       "position": null,
-      "explanation": "\n",
-      "user_solution": "\n",
-      "developer_solution": "\n"
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
+    },
+    {
+      "name": "HMD Global",
+      "manufacturer": [
+        "hmd global"
+      ],
+      "url": "/hmd-global",
+      "award": 0,
+      "position": null,
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
     },
     {
       "name": "HTC",
@@ -226,35 +248,9 @@
       "url": "/htc",
       "award": 0,
       "position": null,
-      "explanation": "\n",
-      "user_solution": "\n",
-      "developer_solution": "\n"
-    },
-    {
-      "name": "Nokia",
-      "manufacturer": [
-        "nokia",
-        "hmd global"
-      ],
-      "url": "/hmd-global",
-      "award": 0,
-      "position": null,
-      "explanation": "\n",
-      "user_solution": "\n",
-      "developer_solution": "\n"
-    },
-    {
-      "name": "AOSP",
-      "manufacturer": [
-        "stock_android",
-        "google"
-      ],
-      "url": "/google",
-      "award": 0,
-      "position": null,
-      "explanation": "\n",
-      "user_solution": "\n",
-      "developer_solution": "\n"
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
     },
     {
       "name": "Other vendors",
@@ -264,9 +260,9 @@
       "url": "/general",
       "award": null,
       "position": 9999,
-      "explanation": "\n",
-      "user_solution": "\n",
-      "developer_solution": "\n"
+      "explanation": "",
+      "user_solution": "",
+      "developer_solution": ""
     }
   ]
 }
